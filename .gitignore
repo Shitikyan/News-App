@@ -1,0 +1,65 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Django related files
+*.log
+*.pot
+*.pyc
+*.pyo
+db.sqlite3-journal
+media
+*.bak
+*.swp
+
+# VS Code related files
+.vscode/
+*.code-workspace
+
+# PyCharm related files
+.idea/
+
+# Jupyter Notebook related files
+.ipynb_checkpoints/
+
+# Environments
+.env
+
+# Compiled Python files
+*.pyc
+
+# Compiled C extensions
+*.pyd
+
+# Python egg metadata
+*.egg-info/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.tox/
+
+# Translations
+*.mo
+*.pot
+
+# Django local settings
+local_settings.py
+
+
+
+# Docker
+Dockerfile
+docker-compose.yml
+docker-compose.override.yml
+*.dockerignore
+
+# Node
+node_modules/
