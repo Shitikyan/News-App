@@ -8,6 +8,40 @@ import random
 current_date = datetime.now()
 formatted_date = current_date.strftime("%A, %B %d, %Y")
 
+def news(request, title):
+    title  = unquote(title)
+    featured_news = News.objects.filter(featured=True)[:10]
+    tranding_news = random.sample(
+        list(featured_news), min(len(featured_news), 5))
+    superuser_author = Author.objects.filter(user__is_superuser=True).first()
+    categories = Category.objects.all()
+    news = News.objects.filter(title=title).first()
+    news_tags = []
+    if_tags = news.tags.all()
+    if if_tags:
+        news_tags = if_tags
+    all_tags = Tag.objects.all()
+    random_image = DecorativeImages.objects.order_by('?').first()
+
+    context = {
+        'featured_news': featured_news,
+        'categories': categories,
+        'tags': all_tags,
+        'tranding_news': tranding_news,
+        'news_tags': news_tags,
+        'news': news,
+        'date': formatted_date,
+        'youtube': superuser_author.youtube_url,
+        'linkedin': superuser_author.linkedin_url,
+        'facebook': superuser_author.facebook_url,
+        'twitter': superuser_author.twitter_url,
+        'tiktok': superuser_author.tiktok_url,
+        'instagram': superuser_author.instagram_url,
+        'image': random_image,
+
+    }
+
+    return render(request, 'news/single.html', context)
 
 def home(request):
     featured_news = News.objects.filter(featured=True)[:10]
@@ -74,7 +108,7 @@ def categories(request):
     featured_news = News.objects.filter(featured=True)[:10]
     categories = Category.objects.all()
     tags = Tag.objects.order_by('?')[:10]
-    tranding_news = random.sample(
+    trending_news = random.sample(
         list(featured_news), min(len(featured_news), 5))
     superuser_author = Author.objects.filter(user__is_superuser=True).first()
     random_image = DecorativeImages.objects.order_by('?').first()
@@ -88,7 +122,7 @@ def categories(request):
         'featured_news': featured_news,
         'tags': tags,
         'categories': categories,
-        'tranding_news': tranding_news,
+        'trending_news': trending_news,
         'category_news': category_news,
         'date': formatted_date,
         'youtube': superuser_author.youtube_url,
@@ -121,7 +155,7 @@ def category(request, name):
 
     categories = Category.objects.all()
     tags = Tag.objects.order_by('?')[:10]
-    tranding_news = random.sample(
+    trending_news = random.sample(
         list(featured_news), min(len(featured_news), 5))
     superuser_author = Author.objects.filter(user__is_superuser=True).first()
     random_image = DecorativeImages.objects.order_by('?').first()
@@ -132,7 +166,7 @@ def category(request, name):
         'categories': categories,
         'name': name,
         'news_page': news_page,
-        'tranding_news': tranding_news,
+        'trending_news': trending_news,
         'date': formatted_date,
         'youtube': superuser_author.youtube_url,
         'linkedin': superuser_author.linkedin_url,
@@ -151,7 +185,7 @@ def newsroom(request, option):
     featured_news = News.objects.filter(featured=True)[:10]
     categories = Category.objects.all()
     tags = Tag.objects.order_by('?')[:10]
-    tranding_news = random.sample(
+    trending_news = random.sample(
         list(featured_news), min(len(featured_news), 5))
     superuser_author = Author.objects.filter(user__is_superuser=True).first()
     random_image = DecorativeImages.objects.order_by('?').first()
@@ -180,7 +214,7 @@ def newsroom(request, option):
         'categories': categories,
         'name': option,
         'news_page': news_page,
-        'tranding_news': tranding_news,
+        'trending_news': trending_news,
         'date': formatted_date,
         'youtube': superuser_author.youtube_url,
         'linkedin': superuser_author.linkedin_url,
