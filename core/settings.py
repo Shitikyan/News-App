@@ -1,10 +1,13 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 from ckeditor.configs import DEFAULT_CONFIG
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 
+
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -22,9 +25,9 @@ ALLOWED_HOSTS = ['*']
 
 
 cloudinary.config( 
-  cloud_name = "dqsqxuue0", 
-  api_key = "193435914849525", 
-  api_secret = "U20m7z9UtRo8IElZH7HtPoD63jo" 
+  cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME'), 
+  api_key = os.getenv('CLOUDINARY_API_KEY'), 
+  api_secret = os.getenv('CLOUDINARY_API_SECRET')
 )
 
 # Application definition
