@@ -29,7 +29,7 @@ This project relies on the following dependencies:
 
 - Django
 - Cloudinary
-- Six
+- django-ckeditor
 - beautifulsoup4
 
 ## Installation
